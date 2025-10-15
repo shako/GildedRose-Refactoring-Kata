@@ -1,7 +1,23 @@
-Feature: Gilded Rose quality
-  I want to know if the quality is updated properly
+Feature: Update quality for regular items
 
-  Scenario: Checking foo
-    Given The item as "fixme"
+  Scenario Outline: sellIn decreases by 1
+    Given The item as "reqularItem" with sellIn <sellInBefore> and quality <qualityBefore>
     When I update the quality
-    Then I should get item as "foo"
+    Then I should get item as "reqularItem" with sellIn <sellInAfter>
+
+    Examples:
+      | sellInBefore | qualityBefore | sellInAfter |
+      | 999          | 5             | 998         |
+      | 1            | 100           | 0           |
+      | 0            | 100           | -1          |
+      | -1           | 100           | -2          |
+
+  Scenario Outline: quality decreases by 1
+    Given The item as "reqularItem" with sellIn <sellInBefore> and quality <qualityBefore>
+    When I update the quality
+    Then I should get item as "reqularItem" with quality <qualityAfter>
+
+    Examples:
+      | sellInBefore | qualityBefore | qualityAfter |
+      | 10           | 5             | 4            |
+      | 1            | 100           | 99           |
