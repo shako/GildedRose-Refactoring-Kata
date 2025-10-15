@@ -12,7 +12,7 @@ Feature: Update quality for regular items
       | 0            | 100           | -1          |
       | -1           | 100           | -2          |
 
-  Scenario Outline: quality decreases by 1 until it reaches 0
+  Scenario Outline: quality decreases by 1 to a minimum of 0
     Given The item as "reqularItem" with sellIn <sellInBefore> and quality <qualityBefore>
     When I update the quality
     Then I should get item as "reqularItem" with quality <qualityAfter>
@@ -25,7 +25,7 @@ Feature: Update quality for regular items
       | 10           | 1             | 0            |
       | 10           | 0             | 0            |
 
-  Scenario Outline: once sell by date has passed, quality decreases by 2 until it reaches 0
+  Scenario Outline: once sell by date has passed, quality decreases by 2 to a minimum of 0
     Given The item as "reqularItem" with sellIn <sellInBefore> and quality <qualityBefore>
     When I update the quality
     Then I should get item as "reqularItem" with quality <qualityAfter>
