@@ -26,6 +26,34 @@ Feature: Effect on quality
       | 10           | 49            | 50           |
       | 10           | 50            | 50           |
 
+  Scenario Outline: quality increases by 2 to a maximum of 50 for backstage passes
+    Given The item as "Backstage passes to a TAFKAL80ETC concert" with sellIn <sellInBefore> and quality <qualityBefore>
+    When I update the quality
+    Then I should get item as "Backstage passes to a TAFKAL80ETC concert" with quality <qualityAfter>
+
+    Examples:
+      | sellInBefore | qualityBefore | qualityAfter |
+      | 14           | 0             | 1            |
+      | 14           | 5             | 6            |
+      | 14           | 48            | 49           |
+      | 14           | 49            | 50           |
+      | 14           | 50            | 50           |
+
+  Scenario Outline: quality increases by 3 to a maximum of 50 for backstage passes for last 5 days
+    Given The item as "Backstage passes to a TAFKAL80ETC concert" with sellIn <sellInBefore> and quality <qualityBefore>
+    When I update the quality
+    Then I should get item as "Backstage passes to a TAFKAL80ETC concert" with quality <qualityAfter>
+
+    Examples:
+      | sellInBefore | qualityBefore | qualityAfter |
+      | 14           | 0             | 1            |
+      | 14           | 5             | 6            |
+      | 4            | 46            | 49           |
+      | 4            | 47            | 50           |
+      | 4            | 48            | 50           |
+      | 4            | 49            | 50           |
+      | 4            | 50            | 50           |
+
   Scenario Outline: quality remains unchanged for sulfuras
     Given The item as "Sulfuras, Hand of Ragnaros" with sellIn <sellInBefore> and quality <qualityBefore>
     When I update the quality
